@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AssouaAlbert/Clothing-shop/issues"
   },
-  "homepage": "https://github.com/AssouaAlbert/Clothing-shop#readme"
+  "homepage": "https://github.com/AssouaAlbert/Clothing-shop#readme",
+  "devDependencies": {
+    "node-sass": "^4.14.1"
+  }
 }
