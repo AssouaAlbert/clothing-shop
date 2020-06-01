@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import HomePage from './pages/homepage/hompage.component';
+import ShopPage from './pages/shoppaage/shoppage.component';
 import {
   Route, Switch, BrowserRouter as Router
 } from 'react-router-dom'
 import './pages/homepage/hompage.style.scss';
 import './App.css';
-
-const HatsPage = () => {
-  return (<div>
-    <h1>Home Page</h1>
-  </div>)
-}
 
 class App extends Component {
   constructor(props){
@@ -23,7 +18,7 @@ class App extends Component {
         <Router>
         <Switch>
         <Route exact path='/' component={HomePage}/>
-        <Route path='/hats' component={HatsPage}/>
+        <Route path='/shop' component={ShopPage}/>
         </Switch>
         </Router>
       </div>   
