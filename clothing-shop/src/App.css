@@ -8,3 +8,8 @@ body {
     font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
     padding: 2em 1em; /*This is to prevent the page from being to tight on the edges*/
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}

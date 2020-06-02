@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HomePage from './pages/homepage/hompage.component';
 import ShopPage from './pages/shoppaage/shoppage.component';
+import Header from './components/header/header.component';
 import {
   Route, Switch, BrowserRouter as Router
 } from 'react-router-dom'
@@ -16,6 +17,7 @@ class App extends Component {
     return(
       <div>'
         <Router>
+          <Header />
         <Switch>
         <Route exact path='/' component={HomePage}/>
         <Route path='/shop' component={ShopPage}/>
