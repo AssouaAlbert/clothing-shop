@@ -10,7 +10,6 @@ class ShopPage extends React.Component {
         }
     }
     render(props) {
-        console.log('props: ', props);
         const {collections} = this.state;
         return ( <div className='shop-page'>
             {
