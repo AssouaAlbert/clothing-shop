@@ -12,11 +12,21 @@
     font-family: 'Open Sans Condensed';
     font-weight: bolder;
     border: none;
+    margin: 5px 0;
     cursor: pointer;
 
     &:hover {
     background-color: white;
     color: black;
     border: 1px solid black;
+    }
+
+    &.google-sign-in {
+        background-color: #4285f4;  
+        color: #fff;
+        &:hover{
+            background-color: darken($color: #4285f4, $amount: 10);
+            border: none;
+        }
     }
 }
