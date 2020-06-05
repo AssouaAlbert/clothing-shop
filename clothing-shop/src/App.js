@@ -7,8 +7,8 @@ import {auth, createUserProfileDocument} from './firebase/firebase.util';
 import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user-action';
 import {
-  Route, Switch, BrowserRouter as Router
-} from 'react-router-dom'
+  Route, Switch, BrowserRouter as Router, Redirect
+} from 'react-router-dom';
 import './pages/homepage/hompage.style.scss';
 import './App.css';
 class App extends Component {
@@ -58,20 +58,30 @@ class App extends Component {
         <Switch>
         <Route exact path='/' component={HomePage}/>
         <Route path='/shop' component={ShopPage}/>
-        <Route path='/signin' component={SingInUpPage}/>
+        <Route exact path='/signin' render={()=>this.props.currentUser? (<Redirect to='/'/>) : <SingInUpPage/> }/>
         </Switch>
         </Router>
       </div>
     );
   }
 }
+// Note that the name dispatch can be any name because cennect;s second argument knows that it is a dispatch
 const mapDispatchToProps = (dispatch) => {
   // store.dispatch(action)
   return {
     // 'setCurrentUser :' is not a function call. but a property returened by connect
     // user is from the combined reducer redux file clothing-shop\src\redux\redux-reducer.js
-  setCurrentUser : user =>{ console.log('user:',user);return dispatch(setCurrentUser(user)) }//anonymose functionl no name
+  setCurrentUser : user =>{ return dispatch(setCurrentUser(user)) }//anonymose functionl no name
   //IN the above code the state is changed and any one listening to that state e.g. header is rerendered
 }}
+//Read the current user from redux store
+//store.user === {user}
+const mapStateToProps = ({user}) => {
+  return {
+    currentUser: user.currentUser
+  }
+}
 //connect will return an object which will be properties of the App component
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
+// The mapStateToProps is needhere to listen to the current user and redirect if the user is logged in i.e. not null
+export default connect(mapStateToProps, mapDispatchToProps)(App);
