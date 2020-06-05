@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from '../../firebase/firebase.util';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 //Connect is a higher order function 
 import {connect} from 'react-redux'
 import {ReactComponent as Logo} from '../../assests/crown-logo.svg';
 import './header.style.scss';
-const Header = ({currentUser}) => {
+import { toggleCartAction } from '../../redux/cart/cart.action';
+const Header = ({currentUser, hidden}) => {
     return ( <div className="header">
         <Link to='/' className='logo-container' ><Logo className='logo'/></Link>
         <div className='options'>
@@ -18,7 +21,12 @@ const Header = ({currentUser}) => {
                 :<Link to='/signin' className='option'>Sign in</Link>
 
             }
+                <CartIcon/>
         </div>
+        {
+            hidden? null
+            :<CartDropdown/>
+        }
     </div> );
 }
 
@@ -28,9 +36,11 @@ const Header = ({currentUser}) => {
  * The first is the function which with helps us access the state
  */
 //State can be any name because it is a ball back functio, whose values are parsed by the connect function
-const mapStateToProps = (store) => {
+// const mapStateToProps = (store) => {
+const mapStateToProps = ({user: {currentUser}, toogleCart: {hidden}}) => {
     return {
-    currentUser: store.user.currentUser
+    currentUser,
+    hidden
 }};
 //Connect is used to connect to the store and any changes will be updated
 export default connect(mapStateToProps)(Header);
