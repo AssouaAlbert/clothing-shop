@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import HomePage from './pages/homepage/hompage.component';
 import ShopPage from './pages/shoppaage/shoppage.component';
 import Header from './components/header/header.component';
+import Checkout from './pages/check-out/checkout.component';
 import SingInUpPage from './pages/sign-in-up-page/sign-in-up-page.component';
 import {auth, createUserProfileDocument} from './firebase/firebase.util';
 import {connect} from 'react-redux';
+import {getUser} from './redux/user/user.selector';
 import {setCurrentUser} from './redux/user/user-action';
 import {
   Route, Switch, BrowserRouter as Router, Redirect
 } from 'react-router-dom';
 import './pages/homepage/hompage.style.scss';
-import './App.css';
+import './App.scss';
 class App extends Component {
   // constructor(props){
   //   super(props);
@@ -58,6 +60,7 @@ class App extends Component {
         <Switch>
         <Route exact path='/' component={HomePage}/>
         <Route path='/shop' component={ShopPage}/>
+        <Route path='/checkout' component={Checkout}/>
         <Route exact path='/signin' render={()=>this.props.currentUser? (<Redirect to='/'/>) : <SingInUpPage/> }/>
         </Switch>
         </Router>
@@ -76,9 +79,9 @@ const mapDispatchToProps = (dispatch) => {
 }}
 //Read the current user from redux store
 //store.user === {user}
-const mapStateToProps = ({user}) => {
+const mapStateToProps = (store) => {
   return {
-    currentUser: user.currentUser
+    currentUser: getUser(store)
   }
 }
 //connect will return an object which will be properties of the App component

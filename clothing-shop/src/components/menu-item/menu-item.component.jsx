@@ -6,6 +6,7 @@ import {
 import './menu-item.style.scss';
 
 const  MenuItem = ({title, imageUrl, size, history, linkURL, match}) => {
+	console.log('match: ', match);
 	return  <div className={`${size} menu-item`}>
 				<div
 				style ={{
