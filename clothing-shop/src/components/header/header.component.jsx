@@ -7,7 +7,6 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import {connect} from 'react-redux'
 import {ReactComponent as Logo} from '../../assests/crown-logo.svg';
 import './header.style.scss';
-import { toggleCartAction } from '../../redux/cart/cart.action';
 const Header = ({currentUser, hidden}) => {
     return ( <div className="header">
         <Link to='/' className='logo-container' ><Logo className='logo'/></Link>

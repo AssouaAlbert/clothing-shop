@@ -3,7 +3,7 @@ $main-color: black;
 
 @mixin shrinkLabel {
 top: -14px;
-font-size: 12px;
+font-size: 14px;
 color: $main-color;
 }
 
@@ -15,7 +15,7 @@ margin: 45px 0;
     background: none;
     background-color: white;
     color: $sub-color;
-    font-size: 18px;
+    font-size: 20px;
     padding: 10px 10px 10px 5px;
     display: block;
     width: 100%;
@@ -39,7 +39,7 @@ input[type='password'] {
 
 .form-input-label {
     color: $sub-color;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
