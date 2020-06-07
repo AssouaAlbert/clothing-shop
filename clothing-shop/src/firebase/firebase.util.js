@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 //This utility is used for authentication
 import 'firebase/auth'; 
 //Firebase has many util libraries which we will not to use all but at this stage we will need two
-//Thuis utility ius used to sve to the database CHECK!
+//This utility ius used to save to the database CHECK!
 import 'firebase/firestore';
 
 const config  = {
@@ -23,9 +23,9 @@ firebase.initializeApp(config); //When this script it run, it should initize fir
  */
 export const createUserProfileDocument = async (userAuth, additionalInformation) => { //Additional information is any information which will be required
     if (!userAuth) return; //If the user is null (the user ius the user from the App file)
-    //Note that this user does not exist; this is only for tryial
+    //Note that this user does not exist; this is only for trial
     //firestore.doc('user/f98ylknsdf');
-    //console.log(firestore.doc('user/f98ylknsdf')); //This will return the reference object in that locatio. This is a *queryref* example
+    //console.log(firestore.doc('user/f98ylknsdf')); //This will return the reference object in that location. This is a *queryref* example
     //Note that this user does not exist
     const userRef = firestore.doc(`user/${userAuth.uid}`);
     const snapShot = await userRef.get();
