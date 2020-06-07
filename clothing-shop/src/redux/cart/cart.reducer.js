@@ -1,5 +1,5 @@
 import userAction from '../user-actions.redux';
-import {addItemToCart} from './cart.util';
+import {addItemToCart, removeItemFromCart, reduceItemFromCart} from './cart.util';
 const INITIAL_STATE = {
     hidden: true,
     cart: []
@@ -16,6 +16,16 @@ const cartReducer = (state= INITIAL_STATE, action) => {
             return {
                 ...state,
                 cart: addItemToCart (state.cart, action.payload)
+            }
+        case userAction.REMOVE_ITEM:
+            return {
+                ...state,
+                cart: removeItemFromCart (state.cart, action.payload)
+            }
+        case userAction.REDUCE_ITEM:
+            return {
+                ...state,
+                cart: reduceItemFromCart (state.cart, action.payload)
             }
         default:
             return state;
