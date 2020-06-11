@@ -1,10 +1,13 @@
 .collection-item {
-    width: 22%;
+    width: 22vw;
     display: flex;
     flex-direction: column;
     position: relative;
     height: 350px;
     align-items: center;
+    padding-bottom: 20px;
+    float: left;
+    margin: 0 10px;
     .custom-button {
         width:90%;
         top: 255px;

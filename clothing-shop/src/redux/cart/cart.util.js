@@ -8,7 +8,7 @@ export const addItemToCart = (cart, addItem) => {
 export const removeItemFromCart = (cart, removeItem) => cart.filter(item => item.id !== removeItem.id) //Returns anything that is true  (If the id do not match return treu)
 
 export const reduceItemFromCart = (cart, reduceItem) =>  {
-    if(reduceItem.quantity==1) {
+    if(reduceItem.quantity===1) {
         return cart.filter(item => item.id !== reduceItem.id)
     }
     else {

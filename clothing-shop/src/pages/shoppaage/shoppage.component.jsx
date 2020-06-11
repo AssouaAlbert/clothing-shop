@@ -1,27 +1,20 @@
 import React from 'react';
-import shopData from '../../data/shopdata';
-import PreviewCollection from '../../components/preview.collection/preview.collection'
+import {
+    Route,
+    withRouter,
+    Switch
+} from 'react-router-dom'
+
+import CollectionOverview from '../../components/collections-overview/collections-overview.component';
+import CollectionPage from '../collection/collection.component';
+
 import './shoppage.style.scss'
-class ShopPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            collections: shopData
-        }
+const ShopPage = ({match}) => {
+    return ( <div className='shop-page'>
+        <Switch>
+        <Route exact path={`${match.url}`} component={CollectionOverview}/>
+        <Route path={`${match.url}/:collectionId`} component={CollectionPage}/>
+        </Switch>
+    </div> );
     }
-    render(props) {
-        const {collections} = this.state;
-        return ( <div className='shop-page'>
-            {
-                collections.map(({id, ...otherCollectionProps}) => (
-                    <PreviewCollection 
-                    key={id}
-                    {...otherCollectionProps}
-                    />
-                ))
-            }
-        </div> );
-    }
-}
- 
-export default ShopPage;
+export default withRouter(ShopPage);

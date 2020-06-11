@@ -6,7 +6,7 @@ import CartItem from '../cart/cart.component';
 import {selectCartItems} from '../../redux/cart/cart.selector';
 import './cart-dropdown.style.scss';
 import {toggleCartAction} from '../../redux/cart/cart.action';
-const Cart = ({cartItems, history,toggleCartAction}) => {
+const Cart = ({cartItems,toggleCartAction, history}) => {
     return ( <div className="cart-dropdown">
         <div className='cart-items'>
             {   

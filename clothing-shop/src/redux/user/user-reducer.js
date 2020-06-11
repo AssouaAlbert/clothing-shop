@@ -20,7 +20,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: action.payload //Remember that this will overide the ...state values
             }
-            break;
         default:
             return state;
     }

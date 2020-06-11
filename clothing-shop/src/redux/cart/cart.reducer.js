@@ -11,7 +11,6 @@ const cartReducer = (state= INITIAL_STATE, action) => {
                 ...state,
                 hidden: !state.hidden
             }
-            break;
         case userAction.ADD_ITEM:
             return {
                 ...state,

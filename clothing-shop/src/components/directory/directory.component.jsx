@@ -1,52 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './directory.style.scss';
+import { connect } from 'react-redux'
+import {getDirectory} from '../../redux/directory/diectory.selector' 
 import MenuItem from '../menu-item/menu-item.component';
 
-class Directory extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sections : [
-            {
-                title: 'hats',
-                imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-                id: 1,
-                linkURL: 'hats'
-                },
-                {
-                title: 'jackets',
-                imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-                id: 2,
-                linkURL: ''
-                },
-                {
-                title: 'sneakers',
-                imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-                id: 3,
-                linkURL: ''
-                },
-                {
-                title: 'womens',
-                imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-                size: 'large',
-                id: 4,
-                linkURL: ''
-                },
-                {
-                title: 'mens',
-                imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-                size: 'large',
-                id: 5,
-                linkURL: ''
-                }
-            ]
-        }
-    }
-    render() {
+const Directory = ({directory}) => {
+    console.log('directory: ', directory);
         return <div className="directory-menu">
             {
                 // this.state.sections.map(({id, title, imageUrl, size}) => {
-                this.state.sections.map(({id, ...otherSectionProps}) => {
+                    directory.map(({id, ...otherSectionProps}) => {
                     return (
                         <MenuItem
                         key={id}
@@ -56,7 +19,10 @@ class Directory extends Component {
                 })
             }
         </div>
+}
+const mapStateToProps = (state, ownProps) => {
+    return {
+        directory: getDirectory(state)
     }
 }
-
-export default Directory;
+export default connect(mapStateToProps)(Directory);

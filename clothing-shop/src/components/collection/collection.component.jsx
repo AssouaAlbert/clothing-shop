@@ -5,7 +5,7 @@ import {addItem} from '../../redux/cart/cart.action';
 import ButtonPrimary from '../buttons/buttons.primary.component';
 
 const Collection = ({item, addItem}) =>  {
-        const {id, price, imageUrl,name} = item;
+        const {price, imageUrl,name} = item;
         return ( <div className='collection-item'>
             <div
             style={{
