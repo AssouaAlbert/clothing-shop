@@ -6,7 +6,6 @@ import {createStructuredSelector} from 'reselect'
 import PreviewCollection from '../preview.collection/preview.collection';
 
 const CollectionOverview = ({collections}) => {
-    console.log('collections: ', collections);
     return ( <div className="collection-overview">
                     {
                 collections.map(({id, ...otherCollectionProps}) => (

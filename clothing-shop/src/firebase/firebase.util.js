@@ -64,3 +64,25 @@ export const signInWithGoogle = () => {
     auth.signInWithPopup(provider);
 }
 export default firebase;
+//This function will not be called again vecause the items have already been pushed into the database
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    // console.log('collectionRef: ', collectionRef);
+    //Beacause all the sets to a collection or a document are sent one at a time:
+    /**
+     * Let;s say we are sending a collections of an array, therefore:
+     * if it fails at index 0, the rest of the array will 
+     * have already been commuted. This is solved using the batch function from the firestore
+     */
+    //Batch is a function (e.g) transactions in mysql whe
+    const batch = firestore.batch();
+    objectsToAdd.forEach( obj => {
+        console.log('obj: ', obj);
+        //In the cide below, we can specify the id. e.g. object.title ; but we will not do that so that firebase can select that for us
+        // const newDocRef =  collectionRef.doc(object.title); //Return the document and send the reference object
+        const newDocRef =  collectionRef.doc(); //Return the document and send the reference object
+        batch.set(newDocRef, obj);
+    })
+    // Now that the request have been batched we can psh to the database
+    return await batch.commit(); //This will return a promise. If commit is succesful, it will return a void/null callue
+}

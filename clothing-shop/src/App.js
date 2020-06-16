@@ -44,10 +44,12 @@ class App extends Component {
               id: snapShot.id, //The id is the id of the snapShot
               ...snapShot.data()
             })
-        })
+        });
       }
       setCurrentUser(userAuth);
-    })
+      //Because the items have already been pushed to the database thus code will not be called again
+      // await addCollectionAndDocuments('collections',collectionArray.map(({title,items}) =>({title, items}))).then(result => console.log(result));
+    });
   }
   componentWillUnmount () {
     this.unsubscribeFromAuth(); //Use this to close the connection (If it is not closed it will show that the user is still active on the application)
@@ -81,7 +83,8 @@ const mapDispatchToProps = (dispatch) => {
 //store.user === {user}
 const mapStateToProps = (store) => {
   return {
-    currentUser: getUser(store)
+    currentUser: getUser(store),
+    // collectionArray:selectCollectionForPreview(store) //Theitemshave already beenpushed tothe database
   }
 }
 //connect will return an object which will be properties of the App component

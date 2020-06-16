@@ -1,9 +1,10 @@
 import React from 'react';
 import './buttons.primary.style.scss';
-const ButtonPrimary = ({children, isGoogleSignIn,inverted,...otherProps}) => {
-    return ( <button className={`${inverted? 'inverted':''}${isGoogleSignIn? 'google-sign-in': '' } custom-button`} {...otherProps}>
+import {ButtonContainer} from './button.styles'
+const ButtonPrimary = ({children,...otherProps}) => {
+    return ( <ButtonContainer {...otherProps}>
         {children}
-    </button> );
+    </ButtonContainer> );
 }
- 
+
 export default ButtonPrimary;

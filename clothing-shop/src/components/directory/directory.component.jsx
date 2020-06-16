@@ -5,7 +5,6 @@ import {getDirectory} from '../../redux/directory/diectory.selector'
 import MenuItem from '../menu-item/menu-item.component';
 
 const Directory = ({directory}) => {
-    console.log('directory: ', directory);
         return <div className="directory-menu">
             {
                 // this.state.sections.map(({id, title, imageUrl, size}) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from '../../firebase/firebase.util';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -7,27 +6,28 @@ import {getUser,toggleCart} from '../../redux/user/user.selector';
 //Connect is a higher order function 
 import {connect} from 'react-redux'
 import {ReactComponent as Logo} from '../../assests/crown-logo.svg';
-import './header.style.scss';
+// import './header.style.scss';
+import {HeaderContainer, OptionLinkContainer, OptionSpanContainer,OptionsContainer, LogoContainter} from './header.styles';
 const Header = ({currentUser, hidden}) => {
-    return ( <div className="header">
-        <Link to='/' className='logo-container' ><Logo className='logo'/></Link>
-        <div className='options'>
-            <Link to='/' className='option'>Home</Link>
-            <Link to='/shop' className='option'>Shop</Link>
-            <Link to='/contact' className='option'>Contact</Link>
+    return ( <HeaderContainer>
+        <LogoContainter to='/'><Logo className='logo'/></LogoContainter>
+        <OptionsContainer>
+            <OptionLinkContainer to='/' >Home</OptionLinkContainer>
+            <OptionLinkContainer to='/shop' >Shop</OptionLinkContainer>
+            <OptionLinkContainer to='/contact' >Contact</OptionLinkContainer>
             {
                 currentUser ?
-                <span className='option' onClick={() => auth.signOut()}>Sign Out</span>
-                :<Link to='/signin' className='option'>Sign in</Link>
+                <OptionSpanContainer  onClick={() => auth.signOut()}>Sign Out</OptionSpanContainer>
+                :<OptionLinkContainer to='/signin' >Sign in</OptionLinkContainer>
 
             }
                 <CartIcon/>
-        </div>
+        </OptionsContainer>
         {
             hidden? null
             :<CartDropdown/>
         }
-    </div> );
+    </HeaderContainer> );
 }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(containerName)
