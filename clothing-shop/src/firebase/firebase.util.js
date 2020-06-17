@@ -77,7 +77,6 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     //Batch is a function (e.g) transactions in mysql whe
     const batch = firestore.batch();
     objectsToAdd.forEach( obj => {
-        console.log('obj: ', obj);
         //In the cide below, we can specify the id. e.g. object.title ; but we will not do that so that firebase can select that for us
         // const newDocRef =  collectionRef.doc(object.title); //Return the document and send the reference object
         const newDocRef =  collectionRef.doc(); //Return the document and send the reference object
@@ -85,4 +84,21 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     })
     // Now that the request have been batched we can psh to the database
     return await batch.commit(); //This will return a promise. If commit is succesful, it will return a void/null callue
+}
+
+export const convertSnapShopToObject = (collections) => {
+    const transformCollections = collections.docs.map(collection => {
+        const {title, items} = collection.data();
+        return {
+            routeName: encodeURI(title.toLowerCase()),         //encodeURL is a function in Javascript which converts a name string e.g. Arabic to a UTL which the browser can understand
+            id: collection.id,
+            items,
+            title
+        }
+    });
+    return transformCollections.reduce((acc, crv) => {
+        acc[crv.title.toLowerCase()] = crv;
+        return acc;
+    } ,{})
+
 }

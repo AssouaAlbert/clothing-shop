@@ -7,9 +7,9 @@ export const getShop = createSelector(
 )
 export const selectCollectionForPreview =createSelector(
     [getShop],
-    shopCollection => Object.keys(shopCollection).map(key => shopCollection[key])
+    shopCollection => shopCollection? Object.keys(shopCollection).map(key => shopCollection[key]) : []
 )
 export const selectCollection = (collectionURLParam) => createSelector(
     [getShop],
-    shopData => shopData[collectionURLParam]
+    shopData => shopData? shopData[collectionURLParam]: null
 )

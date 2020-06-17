@@ -1,0 +1,5 @@
+const SHOP_ACTIONS = {
+    UPDATE_COLLECTION: 'UPDATE_COLLECTIONS'
+}
+
+export default SHOP_ACTIONS;
