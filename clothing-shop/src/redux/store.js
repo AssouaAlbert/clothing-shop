@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from './redux-reducer';
 import {persistStore} from 'redux-persist';
-// import thunk from 'redux-thunk'; //!Redux saga will replace this: Note that thung is used to listen to object actions
+// import thunk from 'redux-thunk'; //!Redux saga will replace this: Note that thunk is used to listen to object actions
 import createSagaMiddleware from 'redux-saga'
 //* Createstore  is used to create store
 //!Middlewares are used to listen for information

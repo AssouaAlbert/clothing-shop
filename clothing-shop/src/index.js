@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'; //This is a compopnent Give access to the store (where state is kept)
-import './index.css';
 import {PersistGate} from 'redux-persist/integration/react';
-import App from './App';
-//Import the store
 import {store,persistor} from './redux/store';
+
+import App from './App';
+
+import './index.css';
+//Import the store
 
 ReactDOM.render(
   <Provider store={store}>

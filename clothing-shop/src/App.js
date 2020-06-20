@@ -23,33 +23,34 @@ class App extends Component {
   unsubscribeFromAuth = null;
   componentDidMount() {
     const {setCurrentUser} = this.props;
+    //! Because we are moving the authentication into the saga ...we will not want any conflicting code in what we write
     /**
      * This function auto.onAuthStateChange returns a function which is used to close the connection
      * The connection between the application and fire base is always open (meaning the Application communicates with the BaaS all the time)
      *
      */
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => { //This is a callback funtion /If there is no user signed in it will return null
-      // console.log('user: ', userAuth);  //Note that if the users State changes (e.g. Sign Out from all devices from another computer) this will change ()
-      if (userAuth) { ///If thed user is signed in
-        const userRef = await createUserProfileDocument(userAuth);
-        /**
-         * Remember that is works like so:
-         * doc => snapshot => data
-         * use .get, .set, .uodate, .remove for doc
-         * use .onSnapShot etc for snapshot
-         * use .data to retrive indormation in a particular shapshop
-         */
-        (await userRef).onSnapshot( snapShot => { //This is similar to the onAuthStateChanged but this is on snap shot change
-          setCurrentUser({
-              id: snapShot.id, //The id is the id of the snapShot
-              ...snapShot.data()
-            })
-        });
-      }
-      setCurrentUser(userAuth);
-      //Because the items have already been pushed to the database thus code will not be called again
-      // await addCollectionAndDocuments('collections',collectionArray.map(({title,items}) =>({title, items}))).then(result => console.log(result));
-    });
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => { //This is a callback funtion /If there is no user signed in it will return null
+    //   // console.log('user: ', userAuth);  //Note that if the users State changes (e.g. Sign Out from all devices from another computer) this will change ()
+    //   if (userAuth) { //* If thed user is signed in
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     /**
+    //      * Remember that is works like so:
+    //      * doc => snapshot => data
+    //      * use .get, .set, .uodate, .remove for doc
+    //      * use .onSnapShot etc for snapshot
+    //      * use .data to retrive indormation in a particular shapshop
+    //      */
+    //     (await userRef).onSnapshot( snapShot => { //This is similar to the onAuthStateChanged but this is on snap shot change
+    //       setCurrentUser({
+    //           id: snapShot.id, //The id is the id of the snapShot
+    //           ...snapShot.data()
+    //         })
+    //     });
+    //   }
+    //   //?Because the items have already been pushed to the database this code will not be called again
+    //   setCurrentUser(userAuth);
+    //   // await addCollectionAndDocuments('collections',collectionArray.map(({title,items}) =>({title, items}))).then(result => console.log(result));
+    // });
   }
   componentWillUnmount () {
     this.unsubscribeFromAuth(); //Use this to close the connection (If it is not closed it will show that the user is still active on the application)

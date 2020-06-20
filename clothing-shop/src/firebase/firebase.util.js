@@ -21,8 +21,9 @@ firebase.initializeApp(config); //When this script it run, it should initize fir
 /**
  * This line of code below 
  */
+
 export const createUserProfileDocument = async (userAuth, additionalInformation) => { //Additional information is any information which will be required
-    if (!userAuth) return; //If the user is null (the user ius the user from the App file)
+    if (!userAuth) return; //If the user is null (the user is the user from the App file)
     //Note that this user does not exist; this is only for trial
     //firestore.doc('user/f98ylknsdf');
     //console.log(firestore.doc('user/f98ylknsdf')); //This will return the reference object in that location. This is a *queryref* example
@@ -48,6 +49,11 @@ export const createUserProfileDocument = async (userAuth, additionalInformation)
     return userRef;
 }
 
+//!
+//!Most of this code hased been moved to the user sagafile
+//!
+//!
+
 export const auth = firebase.auth(); //This contains information about the authenticated/active user (Id the user is not signed in then there will be nothing) 
 export const firestore = firebase.firestore();
 
@@ -56,12 +62,12 @@ export const firestore = firebase.firestore();
 * This is setting up the google authentication tool
 */
 
-const provider = new firebase.auth.GoogleAuthProvider(); //Gives us access to the google authentication class (Therefore there are come functions which we will use along with this)
+export const googleProvider = new firebase.auth.GoogleAuthProvider(); //Gives us access to the google authentication class (Therefore there are come functions which we will use along with this)
 
-provider.setCustomParameters({promt:'select_account'});
+googleProvider.setCustomParameters({promt:'select_account'});
 
 export const signInWithGoogle = () => {
-    auth.signInWithPopup(provider);
+    auth.signInWithPopup(googleProvider);
 }
 export default firebase;
 //This function will not be called again vecause the items have already been pushed into the database
@@ -77,7 +83,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     //Batch is a function (e.g) transactions in mysql whe
     const batch = firestore.batch();
     objectsToAdd.forEach( obj => {
-        //In the cide below, we can specify the id. e.g. object.title ; but we will not do that so that firebase can select that for us
+        //In the code below, we can specify the id. e.g. object.title ; but we will not do that so that firebase can select that for us
         // const newDocRef =  collectionRef.doc(object.title); //Return the document and send the reference object
         const newDocRef =  collectionRef.doc(); //Return the document and send the reference object
         batch.set(newDocRef, obj);
