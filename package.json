@@ -19,6 +19,7 @@
   "devDependencies": {
     "firebase": "^7.14.6",
     "node-sass": "^4.14.1",
-    "react-stripe-checkout": "^2.6.3"
+    "react-stripe-checkout": "^2.6.3",
+    "redux-saga": "^1.1.3"
   }
 }
