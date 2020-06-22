@@ -1,4 +1,4 @@
-import userActions from '../user-actions.redux';
+import userActions from '../user-actions.types';
 export const toggleCartAction = () => ({
     type: userActions.TOGGLE_CART_HIDDEN
 })
@@ -13,4 +13,7 @@ export const removeItem = (item) => ({
 export const reduceItem = (item) => ({
     type: userActions.REDUCE_ITEM,
     payload: item
+})
+export const clearCart = () => ({
+    type: userActions.CLEAR_CART
 })

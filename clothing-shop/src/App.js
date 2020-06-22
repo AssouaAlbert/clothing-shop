@@ -4,10 +4,11 @@ import ShopPage from './pages/shoppage/shoppage.component';
 import Header from './components/header/header.component';
 import Checkout from './pages/check-out/checkout.component';
 import SingInUpPage from './pages/sign-in-up-page/sign-in-up-page.component';
-import {auth, createUserProfileDocument} from './firebase/firebase.util';
+//* This is handledby the redux saga
+//? import {auth, createUserProfileDocument} from './firebase/firebase.util';
 import {connect} from 'react-redux';
 import {getUser} from './redux/user/user.selector';
-import {setCurrentUser} from './redux/user/user-action';
+import {CheckUserSession} from './redux/user/user-action';
 import {
   Route, Switch, BrowserRouter as Router, Redirect
 } from 'react-router-dom';
@@ -20,9 +21,11 @@ class App extends Component {
 
   //   };
   // }
-  unsubscribeFromAuth = null;
+  // unsubscribeFromAuth = null;
   componentDidMount() {
-    const {setCurrentUser} = this.props;
+    const {CheckUserSession} = this.props;
+    CheckUserSession();
+    // const {setCurrentUser} = this.props;
     //! Because we are moving the authentication into the saga ...we will not want any conflicting code in what we write
     /**
      * This function auto.onAuthStateChange returns a function which is used to close the connection
@@ -48,12 +51,13 @@ class App extends Component {
     //     });
     //   }
     //   //?Because the items have already been pushed to the database this code will not be called again
-    //   setCurrentUser(userAuth);
+    //   setCurrentUser(userAuth); //!It will return null id there is no user (This is same with line28 of firebase.utils.js)
     //   // await addCollectionAndDocuments('collections',collectionArray.map(({title,items}) =>({title, items}))).then(result => console.log(result));
     // });
   }
   componentWillUnmount () {
-    this.unsubscribeFromAuth(); //Use this to close the connection (If it is not closed it will show that the user is still active on the application)
+    //! Most of these fiunctions are hanfdled by the middleware
+    //this.unsubscribeFromAuth(); //Use this to close the connection (If it is not closed it will show that the user is still active on the application)
   }
   render(){
     return(
@@ -77,7 +81,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // 'setCurrentUser :' is not a function call. but a property returened by connect
     // user is from the combined reducer redux file clothing-shop\src\redux\redux-reducer.js
-  setCurrentUser : user =>{ return dispatch(setCurrentUser(user)) }//anonymose functionl no name
+    CheckUserSession: () => dispatch(CheckUserSession())
+    //? Moved to usersaga
+  // setCurrentUser : user =>{ return dispatch(setCurrentUser(user)) }//anonymose functionl no name
   //IN the above code the state is changed and any one listening to that state e.g. header is rerendered
 }}
 //Read the current user from redux store

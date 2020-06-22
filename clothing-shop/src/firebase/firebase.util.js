@@ -22,16 +22,28 @@ firebase.initializeApp(config); //When this script it run, it should initize fir
  * This line of code below 
  */
 
+ //This code can be used when you do not have firebase as the backend
+export const getCurrentUser = () => {
+    return new Promise((res, rej)=>{
+        const unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => { //? Check if there is a user session
+            unsubscribeFromAuth(); //This function will call itselve
+            res(user); //If no user session it will return null
+        },
+        rej
+        )
+    })
+}
 export const createUserProfileDocument = async (userAuth, additionalInformation) => { //Additional information is any information which will be required
     if (!userAuth) return; //If the user is null (the user is the user from the App file)
     //Note that this user does not exist; this is only for trial
     //firestore.doc('user/f98ylknsdf');
     //console.log(firestore.doc('user/f98ylknsdf')); //This will return the reference object in that location. This is a *queryref* example
-    //Note that this user does not exist
+    //? This scheme was used for auth.onAuthenticationChange
+    //* const userRef = firestore.doc(`user/${userAuth.uid}`);
     const userRef = firestore.doc(`user/${userAuth.uid}`);
     const snapShot = await userRef.get();
     if (!snapShot.exists) {
-        const {displayName, email} = userAuth; //Get the user name, and email address
+        const {displayName, email} = userAuth.user; //Get the user name, and email address
         const createdAt = new Date();  //Create a time stamp for when the email was created
         try {
             await userRef.set({

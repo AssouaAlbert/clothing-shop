@@ -1,14 +1,19 @@
 import React from 'react';
-import {auth} from '../../firebase/firebase.util';
-import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropdown from '../cart-dropdown/cart-dropdown.component';
-import {getUser,toggleCart} from '../../redux/user/user.selector';
 //Connect is a higher order function 
 import {connect} from 'react-redux'
 import {ReactComponent as Logo} from '../../assests/crown-logo.svg';
+//?Because Everything Has been moved to the Saga this is not needed
+//import {auth} from '../../firebase/firebase.util';
+
+import {getUser,toggleCart} from '../../redux/user/user.selector';
+import {signOutStart} from '../../redux/user/user-action';
+
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
 // import './header.style.scss';
 import {HeaderContainer, OptionLinkContainer, OptionSpanContainer,OptionsContainer, LogoContainter} from './header.styles';
-const Header = ({currentUser, hidden}) => {
+const Header = ({currentUser, hidden, signOutStart}) => {
     return ( <HeaderContainer>
         <LogoContainter to='/'><Logo className='logo'/></LogoContainter>
         <OptionsContainer>
@@ -17,7 +22,7 @@ const Header = ({currentUser, hidden}) => {
             <OptionLinkContainer to='/contact' >Contact</OptionLinkContainer>
             {
                 currentUser ?
-                <OptionSpanContainer  onClick={() => auth.signOut()}>Sign Out</OptionSpanContainer>
+                <OptionSpanContainer  onClick={() => signOutStart()}>Sign Out</OptionSpanContainer>
                 :<OptionLinkContainer to='/signin' >Sign in</OptionLinkContainer>
 
             }
@@ -44,4 +49,12 @@ const mapStateToProps = (store) => {
     hidden: toggleCart(store)
 }};
 //Connect is used to connect to the store and any changes will be updated
-export default connect(mapStateToProps)(Header);
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        signOutStart: () => {
+            dispatch(signOutStart());
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

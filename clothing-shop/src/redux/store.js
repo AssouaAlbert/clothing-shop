@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga'
 //!Middlewares are used to listen for information
 import logger from 'redux-logger'; //Logger contains methods for the middleware
 
-import {fetchCollectionsStart} from './shop/shop.sagas'
+import {} from './shop/shop.sagas'
 import rootSaga from './root-saga';
 
 const sagaMiddleware = createSagaMiddleware();

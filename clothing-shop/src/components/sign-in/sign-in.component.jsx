@@ -1,10 +1,11 @@
 import React from 'react'
-import {auth, signInWithGoogle} from '../../firebase/firebase.util';
+//* signInWithGoogle use to be here but it has been moved to the user.saga file
+//? import {auth} from '../../firebase/firebase.util'; 
 import {connect} from 'react-redux'
 
 import FormInputField from '../form/form-input.component';
 import ButtonPrimary from '../buttons/buttons.primary.component';
-import {googleSignInStart} from '../../redux/user/user-action';
+import {googleSignInStart, emailSignInStart} from '../../redux/user/user-action';
 
 
 import './sign-in.style.scss';
@@ -17,15 +18,19 @@ class SignIn extends React.Component {
             password: ''
         }
     }
+    //* Moved to redux saga
     handleSubmit = async(e) => {
-        e.preventDefault()
+        e.preventDefault();
+        const {emailSignInStart} = this.props;
         const {email, password} = this.state;
-        try {
-        await auth.signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            console.log('Error: ', error);
-        }
-        this.setState({email:'',password:''})
+        emailSignInStart(email, password);
+    //     try {
+    //     await auth.signInWithEmailAndPassword(email, password);
+    //     } catch (error) {
+    //         console.log('Error: ', error);
+    //     }
+    //     this.setState({email:'',password:''})
+    // 
     }
     handleChange = (e) => {
         const {value, name} = e.target;
@@ -37,7 +42,7 @@ class SignIn extends React.Component {
         return ( <div className='sign-in'>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={emailSignInStart}>
                 <FormInputField
                 handleChange= {this.handleChange}
                 type="email"
@@ -71,10 +76,13 @@ class SignIn extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         signInWithGoogle: () => {
             dispatch(googleSignInStart())
+        },
+        emailSignInStart: (email,password) => {
+            dispatch(emailSignInStart ({email,password}))
         }
     }
 }

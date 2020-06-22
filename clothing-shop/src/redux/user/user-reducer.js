@@ -9,15 +9,14 @@
     }
  *  
  */
-import UserActions from '../user-actions.redux';
+import UserActions from '../user-actions.types';
 const INITIAL_STATE = {
     currentUser: null,
     error: null
 }
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case UserActions.GOOGLE_SIGN_IN_SUCCESS:
-        case UserActions.EMAIL_SIGN_IN_SUCCESS:
+        case UserActions.SIGN_IN_SUCCESS:
             return {
                 ...state,
                 //! For email sign in the email and passwords are push into currenUserManually 
@@ -26,8 +25,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 //Set the error to null if the log in is a success
                 error: null
             }
-        case UserActions.GOOGLE_SIGN_IN_FAILURE:
-        case UserActions.EMAIL_SIGN_IN_FAILURE:
+        case UserActions.SIGN_IN_FAILURE:
+        case UserActions.SIGN_OUT_FAILURE:
             return {
                 ...state,
                 error: action.payload
@@ -36,6 +35,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 currentUser: action.payload //Remember that this will overide the ...state values
+            }
+        case UserActions.SIGN_OUT_SUCCESS:
+            return {
+                ...state,
+                currentUser: null,
+                error: null
             }
         default:
             return state;

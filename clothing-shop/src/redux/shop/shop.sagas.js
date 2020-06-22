@@ -26,7 +26,6 @@ import ShopActionTypes from './shop-actions.types';
 
 export function* fetchCollectionsStartAsync() {
     try {    
-        yield console.log('I am fired: fetchCollectionsAsync');
         const collectionRef = firestore.collection(`collections`);
         //Generators run the yeild until the next yield  https://medium.com/front-end-weekly/modern-javascript-and-asynchronous-programming-generators-yield-vs-async-await-550275cbe433#:~:text=Generators%20can%20be%20used%20for,await%20syntax%20is%20built%20on.
         const snapShot = yield collectionRef.get(); 
