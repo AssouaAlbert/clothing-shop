@@ -4,7 +4,10 @@
   "description": "\u001b[1;6F\u001b[B\u001b[F\u001b[B\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[D\u001b[D\u001b[DThis is an e-commerce shop from the online tutorial thought by Yihua. The target is to build an online Ecoomerce website which is fully functional using React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"cd clothing-shop/client && npm start",
+    "build": "cd clothing-shop/client && npm build",
+    "test": "cd clothing-shop/client && npm test",
+    "eject": "cd clothing-shop/client && npm eject"
   },
   "repository": {
     "type": "git",
