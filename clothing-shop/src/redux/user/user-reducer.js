@@ -15,6 +15,7 @@ const INITIAL_STATE = {
     error: null
 }
 const userReducer = (state = INITIAL_STATE, action) => {
+    console.log('action: ', action);
     switch (action.type) {
         case UserActions.SIGN_IN_SUCCESS:
             return {
@@ -27,6 +28,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             }
         case UserActions.SIGN_IN_FAILURE:
         case UserActions.SIGN_OUT_FAILURE:
+        case UserActions.SIGN_UP_FAILURE:
             return {
                 ...state,
                 error: action.payload

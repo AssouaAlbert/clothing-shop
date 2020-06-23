@@ -38,4 +38,15 @@ export const signOutFailure = (error) => ({
 export const signOutSuccess = () => ( {
     type: userActions.SIGN_OUT_SUCCESS,
 })
-
+export const signUpStart = (SignUpInformatin) => ({
+    type: userActions.SIGN_UP_START,
+    payload: SignUpInformatin
+})
+export const singUpSuccessAndLogin = (NewUserInformation) => ({
+    type: userActions.SIGN_UP_SUCCESS,
+    payload: NewUserInformation
+})
+export const signUpFailure = (errorMessage) => ({
+    type: userActions.SIGN_UP_FAILURE,
+    payload: errorMessage
+})

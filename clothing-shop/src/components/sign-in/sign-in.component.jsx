@@ -23,7 +23,7 @@ class SignIn extends React.Component {
         e.preventDefault();
         const {emailSignInStart} = this.props;
         const {email, password} = this.state;
-        emailSignInStart(email, password);
+        emailSignInStart({email, password});
     //     try {
     //     await auth.signInWithEmailAndPassword(email, password);
     //     } catch (error) {
@@ -31,6 +31,7 @@ class SignIn extends React.Component {
     //     }
     //     this.setState({email:'',password:''})
     // 
+    this.setState({email : '',password: ''})
     }
     handleChange = (e) => {
         const {value, name} = e.target;
@@ -42,7 +43,7 @@ class SignIn extends React.Component {
         return ( <div className='sign-in'>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
-            <form onSubmit={emailSignInStart}>
+            <form onSubmit={this.handleSubmit}>
                 <FormInputField
                 handleChange= {this.handleChange}
                 type="email"
@@ -81,8 +82,8 @@ const mapDispatchToProps = (dispatch) => {
         signInWithGoogle: () => {
             dispatch(googleSignInStart())
         },
-        emailSignInStart: (email,password) => {
-            dispatch(emailSignInStart ({email,password}))
+        emailSignInStart: (emailAndPassword) => {
+            dispatch(emailSignInStart (emailAndPassword))
         }
     }
 }

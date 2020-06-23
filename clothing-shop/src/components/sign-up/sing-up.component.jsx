@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+
+import {signUpStart} from '../../redux/user/user-action';
+
 import FormInput from '../form/form-input.component';
 import Button from '../buttons/buttons.primary.component';
-import './sign-up.style.scss';
 import {auth, createUserProfileDocument} from '../../firebase/firebase.util';
+import './sign-up.style.scss';
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -19,16 +23,20 @@ class SignUp extends React.Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-        const {displayName, email, password, confirmpassword} = this.state;
+        const {password, confirmpassword} = this.state;
+        const {...userInfo} = this.state;
         if(password !== confirmpassword ) alert('Password and Confirm Password do notmatch');
-        try{
-            const {user} = await auth.createUserWithEmailAndPassword(email, password); //This will return thr user created by email and password
-            //Add the user to the database
-            await createUserProfileDocument(user, {displayName}); //Remember that the otherinformation is used here
-        }
-        catch (error) {
-                console.log(error);
-        }
+        const {signUpStart} = this.props;
+        signUpStart(userInfo);
+        //! Move to the sagas
+        // try{
+        //     const {user} = await auth.createUserWithEmailAndPassword(email, password); //This will return thr user created by email and password
+        //     //Add the user to the database
+        //     await createUserProfileDocument(user, {displayName}); //Remember that the other information dateCreated and display Name are used here
+        // }
+        // catch (error) {
+        //         console.log(error);
+        // }
         this.setState({
             displayName: '',
             email: '',
@@ -38,6 +46,7 @@ class SignUp extends React.Component {
     }
     render() {
         const {displayName, email, password, confirmpassword} = this.state;
+        const {signUp} = this.props;
         return ( <div className="sign-up">
             <h2 className="title">I don't have an account</h2>
             <span>Sign Up with Email and Password</span>
@@ -53,4 +62,11 @@ class SignUp extends React.Component {
         </div> );
     }
 }
- export default SignUp;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        signUpStart: (userInfo) => {
+            dispatch(signUpStart(userInfo))
+        }
+    }
+}
+export default connect(null, mapDispatchToProps)(SignUp);
