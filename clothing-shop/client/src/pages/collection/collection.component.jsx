@@ -12,8 +12,11 @@ const CollectionPage = ({collection}) => {
     return ( <div className="collection-page">
         <h2 className="title">{title}</h2>
         <div className="items">{
-            items.map(({id,...item}) =>  
-                <Collection key={id} className="collection-item" item={item}/>)
+            items.map((item) =>
+                {   
+                    const {id} = item;
+                    return <Collection key={id} className="collection-item" item={item}/>
+                })
         }
         </div>
     </div> );

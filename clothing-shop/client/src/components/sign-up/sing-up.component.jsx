@@ -5,7 +5,7 @@ import {signUpStart} from '../../redux/user/user-action';
 
 import FormInput from '../form/form-input.component';
 import Button from '../buttons/buttons.primary.component';
-import {auth, createUserProfileDocument} from '../../firebase/firebase.util';
+// import {auth, createUserProfileDocument} from '../../firebase/firebase.util';
 import './sign-up.style.scss';
 class SignUp extends React.Component {
     constructor(props) {
@@ -46,7 +46,6 @@ class SignUp extends React.Component {
     }
     render() {
         const {displayName, email, password, confirmpassword} = this.state;
-        const {signUp} = this.props;
         return ( <div className="sign-up">
             <h2 className="title">I don't have an account</h2>
             <span>Sign Up with Email and Password</span>
@@ -62,7 +61,7 @@ class SignUp extends React.Component {
         </div> );
     }
 }
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         signUpStart: (userInfo) => {
             dispatch(signUpStart(userInfo))
