@@ -6,14 +6,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const config  = {
-    apiKey: "AIzaSyAbf__HtEZuHchb20zaCHb_5Oo33IUk7Q8",
-    authDomain: "clothing-shop-2b253.firebaseapp.com",
-    databaseURL: "https://clothing-shop-2b253.firebaseio.com",
-    projectId: "clothing-shop-2b253",
-    storageBucket: "clothing-shop-2b253.appspot.com",
-    messagingSenderId: "218376645684",
-    appId: "1:218376645684:web:d348daab7eff0c273eee61",
-    measurementId: "G-483F3KTLLF"
+
 }
 
 firebase.initializeApp(config); //When this script it run, it should initize firebase using these credentials;
